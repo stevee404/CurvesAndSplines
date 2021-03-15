@@ -18,7 +18,7 @@ public class UniformBSpline extends AbstractCurve{
     }
 
     public int getM() {
-        // 1 2 3 4 5 6 7 8 9 10 11 12 13 14     fulcrums
+        // 1 2 3 4 5 6 7 8 9 10 11 12 13 14     control points
         // 0 0 0 1 2 3 4 5 6 7  8  9  10 11     segments
         // 0 0 1 2 3 4 5 6 7 8  9  10 11 12     m
         return Math.max(controlPoints.size()-2,0);

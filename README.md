@@ -1,14 +1,15 @@
-# CurvesAndSplines
-Small Programm in JavaFX that can calculate and display uniform B-Splines and Bezier-Curves/Splines
+# Curves And Splines
+A small Programm in JavaFX that can calculate and display **uniform B-Splines** and **Bezier-Curves/Splines**
 
 ## Execution
-You only need to have Gradle installed. Then you should be able to either run it or distribute it and run it outside of Gradle 
+You only need to have Gradle installed. Then you should be able to type either `gradle run` to execute it
+or `gradle distribute` to execute it outside of Gradle 
 
 ## Syntax
 - **Control Points:** x1,y1,x2,y2,...,xn,yn
 - **Knotvector**:
   - BSpline: t1,t2,t3,...,tn-2
-  - Bezier: (no syntax yet, just type one number for each segment)
+  - Bezier: no syntax yet, just type one number for each knot (#knots = #segments + 1)
 
 ## Examples on how to use it
 
