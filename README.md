@@ -2,10 +2,10 @@
 Small Programm in JavaFX that can calculate and display uniform B-Splines and Bezier-Curves/Splines
 
 ## Syntax
-**Control Points:** x1,y1,x2,y2,...,xn,yn
-**Knotvector**:
-- BSpline: t1,t2,t3,...,tn-2
-- Bezier: (no syntax yet, just type one number for each segment)
+- **Control Points:** x1,y1,x2,y2,...,xn,yn
+- **Knotvector**:
+  - BSpline: t1,t2,t3,...,tn-2
+  - Bezier: (no syntax yet, just type one number for each segment)
 
 ## Examples on how to use it
 
