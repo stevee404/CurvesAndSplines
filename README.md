@@ -17,13 +17,16 @@ or `gradle distribute` to execute it outside of Gradle
 - **CurveType:** Bezier
 - **Control Points:** 0,0,2,4,4,4,6,0
 - **Knotvector:** 0,1
+![image](https://user-images.githubusercontent.com/80679352/111209187-0219cd00-85cc-11eb-86ca-f6ffe62d4b0b.png)
 
 ### A Bezier-Spline
 - **CurveType:** Bezier
-- **Control Points:** 0,0,2,4,4,4,6,0,8,-2,10,4,12,0
+- **Control Points:** 0,0,6,6,2,4,6,2,10,0,7,5,6,6
 - **Knotvector:** 0,1,2
+![image](https://user-images.githubusercontent.com/80679352/111209752-b7e51b80-85cc-11eb-9f59-246d10a7a59c.png)
 
 ### A B-Spline
 - **CurveType:** Uniform B-Spline
 - **Control Points:** 1,2,1,5,4,5,2,4,3,1,3,1,5,2,6,6,6,6,6,6,6,4,6,4,8,4,9,1
-- **Knotvector:** 0,1,2,4,5,6,7,8,9,10,11
+- **Knotvector:** 0,1,2,3,4,5,6,7,8,9,10,11
+![image](https://user-images.githubusercontent.com/80679352/111209909-e82cba00-85cc-11eb-80b1-7994f4ede589.png)
