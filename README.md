@@ -10,16 +10,16 @@ Small Programm in JavaFX that can calculate and display uniform B-Splines and Be
 ## Examples on how to use it
 
 ### A normal Bezier
-**CurveType:** Bezier \n
-**Control Points:** 0,0,2,4,4,4,6,0
-**Knotvector:** 0,1
+- **CurveType:** Bezier
+- **Control Points:** 0,0,2,4,4,4,6,0
+- **Knotvector:** 0,1
 
 ### A Bezier-Spline
-**CurveType:** Bezier
-**Control Points:** 0,0,2,4,4,4,6,0,8,-2,10,4,12,0
-**Knotvector:** 0,1,2
+- **CurveType:** Bezier
+- **Control Points:** 0,0,2,4,4,4,6,0,8,-2,10,4,12,0
+- **Knotvector:** 0,1,2
 
 ### A B-Spline
-**CurveType:** Uniform B-Spline
-**Control Points:** 1,2,1,5,4,5,2,4,3,1,3,1,5,2,6,6,6,6,6,6,6,4,6,4,8,4,9,1
-**Knotvector:** 0,1,2,4,5,6,7,8,9,10,11
+- **CurveType:** Uniform B-Spline
+- **Control Points:** 1,2,1,5,4,5,2,4,3,1,3,1,5,2,6,6,6,6,6,6,6,4,6,4,8,4,9,1
+- **Knotvector:** 0,1,2,4,5,6,7,8,9,10,11
