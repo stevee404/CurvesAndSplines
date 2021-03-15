@@ -10,7 +10,7 @@ Small Programm in JavaFX that can calculate and display uniform B-Splines and Be
 ## Examples on how to use it
 
 ### A normal Bezier
-**CurveType:** Bezier
+**CurveType:** Bezier \n
 **Control Points:** 0,0,2,4,4,4,6,0
 **Knotvector:** 0,1
 
