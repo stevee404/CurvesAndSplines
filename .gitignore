@@ -1,10 +1,11 @@
 #IDE
 
 #gradle
-/.gradle
+.gradle/
 
 #ignore build directory
-/build
+build/*
+!build/distributions
 
 #github/bitbonk.gitignore
 
