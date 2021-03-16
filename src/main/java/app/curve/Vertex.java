@@ -54,23 +54,21 @@ public class Vertex {
         this.y = y;
     }
 
+    public void translate(Vertex v) {
+        translate(v.getX(), v.getY());
+    }
+
     public void translate(double x, double y) {
         this.x += x;
         this.y += y;
     }
 
-    public void scale(double s) {
-        this.x *= s;
-        this.y *= s;
+    public void scale(Vertex v) {
+        scale(v.getX(),v.getY());
     }
     public void scale(double sx, double sy) {
         this.x *= sx;
         this.y *= sy;
-    }
-
-    public void translate(Vertex v) {
-        this.x += v.getX();
-        this.y += v.getY();
     }
 
     public double length() {

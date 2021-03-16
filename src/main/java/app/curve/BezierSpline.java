@@ -34,22 +34,21 @@ public class BezierSpline extends AbstractCurve{
                 transformedControlPoints.get(x+3).toArray()
         };
 
-        LinkedList<Double> segPoints = new LinkedList<>();
+        LinkedList<Vertex> segPoints = new LinkedList<>();
         for (double t = 0; t <= 1.01; t += 0.01) {
             double[][] segT = {
                     {t * t * t, t * t, t, 1}
             };
             double[][] val = Matrix.mult(basis, G);
             val = Matrix.mult(segT, val);
-            segPoints.add(val[0][0]);
-            segPoints.add(val[0][1]);
+            segPoints.add(new Vertex(val[0][0],val[0][1]));
         }
         segments.add(i, segPoints);
     }
 
     @Override
     public void calcCurve() throws Exception{
-        transformCoordinatesystem();
+//        transformCoordinatesystem();
         for (int i=0;i < getM();i++) {
             calcSegment(i);
         }

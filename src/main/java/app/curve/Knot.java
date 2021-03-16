@@ -9,6 +9,9 @@ class Knot extends Vertex {
         super(x, y);
         this.t = t;
     }
+    public Knot(Vertex v, int t) {
+        this(v.getX(),v.getY(),t);
+    }
 
     @Override
     public boolean equals(Object o) {

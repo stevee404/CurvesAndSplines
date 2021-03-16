@@ -37,13 +37,13 @@ public class UniformBSpline extends AbstractCurve{
         }
 
         double [][] G = {
-                transformedControlPoints.get(i-3).toArray(),
-                transformedControlPoints.get(i-2).toArray(),
-                transformedControlPoints.get(i-1).toArray(),
-                transformedControlPoints.get(i).toArray()
+                controlPoints.get(i-3).toArray(),
+                controlPoints.get(i-2).toArray(),
+                controlPoints.get(i-1).toArray(),
+                controlPoints.get(i).toArray()
         };
 
-        LinkedList<Double> segPoints = new LinkedList<>();
+        LinkedList<Vertex> segPoints = new LinkedList<>();
         for (double t = 0; t <= 1; t += 0.01) {
             double[][] segT = {
                     {t * t * t, t * t, t, 1}
@@ -51,15 +51,14 @@ public class UniformBSpline extends AbstractCurve{
             double[][] val = Matrix.mult(basis, G);
             val = Matrix.mult(BASIS_CONSTANT, val);
             val = Matrix.mult(segT, val);
-            segPoints.add(val[0][0]);
-            segPoints.add(val[0][1]);
+
+            segPoints.add(new Vertex(val[0][0],val[0][1]));
         }
         segments.add(i-3, segPoints);
     }
 
     @Override
     public void calcCurve() throws Exception{
-        transformCoordinatesystem();
         for (int i = 0; i < getM()-1; i++) {
             calcSegment(i+3);
         }

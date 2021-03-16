@@ -52,13 +52,12 @@ public class Controller {
             Group knots = new Group();
             root.getChildren().addAll(controlPoints, knots);
 
-            c.drawCurve(root.getChildren());
-            c.drawControlPoints(controlPoints.getChildren());
-            c.drawKnots(knots.getChildren());
+            c.draw(controlPoints.getChildren(), knots.getChildren(), root.getChildren());
 
             drawPane.getChildren().add(root);
         } catch (Exception e) {
             System.err.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 

@@ -16,11 +16,9 @@ public interface Curve {
 
     List<Vertex> getControlPoints();
     List<Knot> getKnots();
-    List<List<Double>> getSegments();
+    List<List<Vertex>> getSegments();
 
     void calcCurve() throws Exception;
 
-    void drawControlPoints(ObservableList<Node> children);
-    void drawKnots(ObservableList<Node> children);
-    void drawCurve(ObservableList<Node> children);
+    void draw(ObservableList<Node> obsCP, ObservableList<Node> obsKnots, ObservableList<Node> obsCurve);
 }
