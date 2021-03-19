@@ -3,6 +3,10 @@ package app.curve;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @author stevee404
+ * @version 1.0
+ */
 public class BezierSpline extends AbstractCurve{
     private final double[][] basis = {
             {-1, 3, -3, 1},
@@ -15,6 +19,7 @@ public class BezierSpline extends AbstractCurve{
         super(w, h);
     }
 
+    @Override
     public int getM() {
         // Segments:
         // 1 2 3  4  5  6  7  8
@@ -28,28 +33,26 @@ public class BezierSpline extends AbstractCurve{
     protected void calcSegment(int i) throws Exception{
         int x = (int)Math.pow(4,i) -1;
         double [][] G = {
-                transformedControlPoints.get(x).toArray(),
-                transformedControlPoints.get(x+1).toArray(),
-                transformedControlPoints.get(x+2).toArray(),
-                transformedControlPoints.get(x+3).toArray()
+                controlPoints.get(x).toArray(),
+                controlPoints.get(x+1).toArray(),
+                controlPoints.get(x+2).toArray(),
+                controlPoints.get(x+3).toArray()
         };
 
-        LinkedList<Double> segPoints = new LinkedList<>();
+        LinkedList<Vertex> segPoints = new LinkedList<>();
         for (double t = 0; t <= 1.01; t += 0.01) {
             double[][] segT = {
                     {t * t * t, t * t, t, 1}
             };
             double[][] val = Matrix.mult(basis, G);
             val = Matrix.mult(segT, val);
-            segPoints.add(val[0][0]);
-            segPoints.add(val[0][1]);
+            segPoints.add(new Vertex(val[0][0],val[0][1]));
         }
         segments.add(i, segPoints);
     }
 
     @Override
     public void calcCurve() throws Exception{
-        transformCoordinatesystem();
         for (int i=0;i < getM();i++) {
             calcSegment(i);
         }
@@ -77,15 +80,5 @@ public class BezierSpline extends AbstractCurve{
         addKnotvalue(1);
         addKnotvalue(2);
         calcCurve();
-    }
-
-    @Override
-    public List<Vertex> getControlPoints() {
-        return null;
-    }
-
-    @Override
-    public List<Knot> getKnots() {
-        return null;
     }
 }

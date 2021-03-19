@@ -13,7 +13,7 @@ public class MainFX extends Application {
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("main.fxml"));
 
-        primaryStage.setTitle("Uniform B-Spline");
+        primaryStage.setTitle("Curves and Splines");
         primaryStage.setScene(new Scene(root));
         primaryStage.show();
     }

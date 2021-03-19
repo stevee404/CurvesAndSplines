@@ -2,12 +2,20 @@ package app.curve;
 
 import java.util.Objects;
 
+/**
+ * This class is only adds the knotvalue t to a Vertex
+ * @author stevee404
+ * @version 1.0
+ */
 class Knot extends Vertex {
-    int t;
+    private int t;
 
     public Knot(double x, double y, int t) {
         super(x, y);
         this.t = t;
+    }
+    public Knot(Vertex v, int t) {
+        this(v.getX(),v.getY(),t);
     }
 
     @Override
@@ -30,7 +38,7 @@ class Knot extends Vertex {
     }
 
     @Override
-    public String myString(int i) {
+    public String toText(int i) {
         return "Q("+ t + ")";
     }
 

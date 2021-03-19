@@ -1,5 +1,10 @@
 package app.curve;
 
+/**
+ * This class implements matrix operations with multi-dimensional arrays.
+ * @author stevee404
+ * @version 1.0
+ */
 public class Matrix {
     static double[][] mult(double[][] a, double[][] b) throws Exception{
         if (a[0].length != b.length)
@@ -26,25 +31,5 @@ public class Matrix {
             }
         }
         return c;
-    }
-
-    public static void main(String[] args) throws Exception{
-        double[][] a = {
-                {1,0,0},
-        };
-        double[][] b = {
-                {1,0,1},
-                {0,1,2},
-                {0,0,1},
-        };
-
-
-        double[][] c = mult(a,b);
-        for (double[] doubles : c) {
-            for (int j = 0; j < c[0].length; j++) {
-                System.out.print(doubles[j] + ",");
-            }
-            System.out.println();
-        }
     }
 }
