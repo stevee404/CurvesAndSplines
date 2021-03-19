@@ -3,6 +3,10 @@ package app.curve;
 import java.util.LinkedList;
 import java.util.List;
 
+/**
+ * @author stevee404
+ * @version 1.0
+ */
 public class BezierSpline extends AbstractCurve{
     private final double[][] basis = {
             {-1, 3, -3, 1},
@@ -15,6 +19,7 @@ public class BezierSpline extends AbstractCurve{
         super(w, h);
     }
 
+    @Override
     public int getM() {
         // Segments:
         // 1 2 3  4  5  6  7  8
@@ -28,10 +33,10 @@ public class BezierSpline extends AbstractCurve{
     protected void calcSegment(int i) throws Exception{
         int x = (int)Math.pow(4,i) -1;
         double [][] G = {
-                transformedControlPoints.get(x).toArray(),
-                transformedControlPoints.get(x+1).toArray(),
-                transformedControlPoints.get(x+2).toArray(),
-                transformedControlPoints.get(x+3).toArray()
+                controlPoints.get(x).toArray(),
+                controlPoints.get(x+1).toArray(),
+                controlPoints.get(x+2).toArray(),
+                controlPoints.get(x+3).toArray()
         };
 
         LinkedList<Vertex> segPoints = new LinkedList<>();
@@ -48,7 +53,6 @@ public class BezierSpline extends AbstractCurve{
 
     @Override
     public void calcCurve() throws Exception{
-//        transformCoordinatesystem();
         for (int i=0;i < getM();i++) {
             calcSegment(i);
         }
@@ -76,15 +80,5 @@ public class BezierSpline extends AbstractCurve{
         addKnotvalue(1);
         addKnotvalue(2);
         calcCurve();
-    }
-
-    @Override
-    public List<Vertex> getControlPoints() {
-        return null;
-    }
-
-    @Override
-    public List<Knot> getKnots() {
-        return null;
     }
 }

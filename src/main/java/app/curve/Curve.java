@@ -6,6 +6,10 @@ import javafx.scene.Node;
 import java.util.Collection;
 import java.util.List;
 
+/**
+ * @author stevee404
+ * @version 1.0
+ */
 public interface Curve {
 
     void addControlPoint(Vertex v);
@@ -17,6 +21,7 @@ public interface Curve {
     List<Vertex> getControlPoints();
     List<Knot> getKnots();
     List<List<Vertex>> getSegments();
+    int getM();
 
     void calcCurve() throws Exception;
 

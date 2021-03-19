@@ -1,7 +1,7 @@
 package app;
 
 /**
- * Need this class, cause javafx sucks and does not run as an executable otherwise
+ * Need this class, cause javafx sucks and somehow it does not run as an executable otherwise
  */
 public class Executable {
 

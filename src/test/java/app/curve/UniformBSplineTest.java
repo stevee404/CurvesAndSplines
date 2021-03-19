@@ -1,6 +1,5 @@
 package app.curve;
 
-import app.curve.UniformBSpline;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -65,12 +64,12 @@ class UniformBSplineTest {
     @Test
     public void calcSegment_test1(){ //not enough fulcrums
         try {
-            //b.calcSegment(3);
+            b.calcSegment(3);
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-/*Ü
+
     @Test
     public void calcSegment_test2(){ //not enough knotvalues
         b.addControlPoint(2,4);
@@ -155,5 +154,4 @@ class UniformBSplineTest {
         }
     }
 
-*/
 }

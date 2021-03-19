@@ -2,6 +2,10 @@ package app.curve;
 
 import java.util.Objects;
 
+/** This class represents a point/vector (x,y) with methods for translation and scaling.
+ * @author stevee404
+ * @version 1.0
+ */
 public class Vertex {
     private double x;
     private double y;
@@ -30,7 +34,8 @@ public class Vertex {
                 ", y=" + y +
                 '}';
     }
-    public String myString(int i) {
+
+    public String toText(int i) {
         return ""+i;
     }
 
