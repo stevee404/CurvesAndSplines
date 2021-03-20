@@ -35,12 +35,9 @@ public class Controller {
             if (type == null) {
                 throw new Exception("No Curve Type selected!");
             }
-
-            String cp = controlPoints.getCharacters().toString();
-            List<Double> cpl = parseTextField(cp);
-
-            String kv = knotVector.getCharacters().toString();
-            List<Double> kvl = parseTextField(kv);
+            // parsing text fields
+            List<Double> cpl = parseTextField(controlPoints.getCharacters().toString());
+            List<Double> kvl = parseTextField(knotVector.getCharacters().toString());
 
             Curve c = CurveFactory.createCurve(type, drawPane.getWidth(), drawPane.getHeight());
             c.addAllControlPoints(cpl);
@@ -48,11 +45,12 @@ public class Controller {
             c.calcCurve();
 
             Group root = new Group();
+            Group curve = new Group();
             Group controlPoints = new Group();
             Group knots = new Group();
-            root.getChildren().addAll(controlPoints, knots);
+            root.getChildren().addAll(curve, controlPoints, knots);
 
-            c.draw(controlPoints.getChildren(), knots.getChildren(), root.getChildren());
+            c.draw(controlPoints.getChildren(), knots.getChildren(), curve.getChildren());
 
             drawPane.getChildren().add(root);
         } catch (Exception e) {

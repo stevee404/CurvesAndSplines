@@ -109,7 +109,7 @@ public abstract class AbstractCurve implements Curve {
             if (v.getX() > max.getX()) max.setX(v.getX());
             if (v.getY() > max.getY()) max.setY(v.getY());
         }
-        int s = (int) Math.min(w / max.getX(), h / max.getY());
+        double s = Math.min(w / max.getX(), h / max.getY());
         scale.setX(s);
         scale.setY(-s);
         // Calculate translation to the center of the view
@@ -126,14 +126,14 @@ public abstract class AbstractCurve implements Curve {
 
     protected void autoCompleteKnotvector() { // for uniform Splines
         int delta = knotVector.get(knotVector.size() - 1) - knotVector.get(knotVector.size() - 2);
+        int length = Math.abs(knotVector.size() - getM());
 
         if (knotVector.size() < getM()) {
-            for (int i = knotVector.size() - 1; i < getM(); i++) {
-                knotVector.add(knotVector.get(i) + delta);
+            for (int i = 0; i < length; i++) {
+                knotVector.add(knotVector.get(knotVector.size()-1) + delta);
             }
         } else {
-            int size = knotVector.size() - getM();
-            for (int i = 0; i < size; i++) {
+            for (int i = 0; i < length; i++) {
                 knotVector.remove(knotVector.size() - 1);
             }
         }
@@ -209,7 +209,8 @@ public abstract class AbstractCurve implements Curve {
     protected void drawCurve(ObservableList<Node> children) {
         Polyline p = new Polyline();
         segments.forEach(seg ->
-                seg.forEach(num -> {
+                seg.forEach(n -> {
+                    var num = new Vertex(n.getX(), n.getY());
                     num.scale(scale);
                     num.translate(translation);
                     p.getPoints().addAll(num.toArray()[0], num.toArray()[1]);

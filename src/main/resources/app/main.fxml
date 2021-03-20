@@ -38,7 +38,7 @@
                     </rowConstraints>
                      <children>
                         <ChoiceBox fx:id="cbox" prefWidth="150.0" GridPane.rowIndex="1" />
-                        <TextField fx:id="controlPoints" prefHeight="3.0" prefWidth="248.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <TextField fx:id="controlPoints" prefHeight="3.0" prefWidth="248.0" promptText="x1, y1, x2, y2, x3, y3, ..., xn, yn" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                         <TextField fx:id="knotVector" prefHeight="25.0" prefWidth="173.0" GridPane.columnIndex="2" GridPane.hgrow="NEVER" GridPane.rowIndex="1" GridPane.vgrow="NEVER" />
                         <Button mnemonicParsing="false" onAction="#drawOnAction" text="Draw" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                         <Label text="Select Curve Type:">
