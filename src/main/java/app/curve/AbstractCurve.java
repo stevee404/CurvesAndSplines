@@ -29,12 +29,30 @@ public abstract class AbstractCurve implements Curve {
     protected List<Vertex> centerOfSpline = new LinkedList<>();
 
     private double margin = 40;
-    private Vertex scale = new Vertex(0,0);
-    private Vertex translation = new Vertex(0,0);
+    private Vertex scale;
+    private Vertex translation;
 
     public AbstractCurve(double w, double h) {
         width = w;
         height = h;
+    }
+
+    @Override
+    public void setWidth(double width) {
+        assert(width >= 0);
+        this.width = width;
+    }
+
+    @Override
+    public void setHeight(double height) {
+        assert(height >= 0);
+        this.height = height;
+    }
+
+    @Override
+    public void setDimensions(double width, double height) {
+        setWidth(width);
+        setHeight(height);
     }
 
     @Override
@@ -46,10 +64,11 @@ public abstract class AbstractCurve implements Curve {
     public void addControlPoint(double x, double y) {
         addControlPoint(new Vertex(x, y));
     }
+
     @Override
     public void addAllControlPoints(List<Double> list) {
-        for (int i= 0; i < list.size()-1;i+=2) {
-            addControlPoint(list.get(i), list.get(i+1));
+        for (int i = 0; i < list.size() - 1; i += 2) {
+            addControlPoint(list.get(i), list.get(i + 1));
         }
     }
 
@@ -59,9 +78,9 @@ public abstract class AbstractCurve implements Curve {
     }
 
     @Override
-    public void addAllKnotvalues(List<Double> list) {
-        for (Double t : list) {
-            addKnotvalue(t.intValue());
+    public void addAllKnotvalues(List<Integer> list) {
+        for (Integer t : list) {
+            addKnotvalue(t);
         }
     }
 
@@ -80,8 +99,13 @@ public abstract class AbstractCurve implements Curve {
         return segments;
     }
 
+    @Override
+    public List<Integer> getKnotvector(){
+        return knotVector;
+    }
     /**
      * This function calculates how many segments this curve has, based on the number of control points.
+     *
      * @return The number of segments.
      */
     @Override
@@ -89,6 +113,7 @@ public abstract class AbstractCurve implements Curve {
 
     /**
      * This function calculates the transformation, so when drawn, the curve is correctly displayed to the user.
+     *
      * @param points a list of points (x,y), often the control points
      */
     protected void calcTransformation(List<? extends Vertex> points) {
@@ -98,7 +123,6 @@ public abstract class AbstractCurve implements Curve {
         double h = height - margin * 2;
 
         // Calculate most optimal Scale
-        scale = new Vertex(0,0);
         for (Vertex v : points) {
             if (v.getX() < min.getX()) min.setX(v.getX());
             if (v.getY() < min.getY()) min.setY(v.getY());
@@ -106,7 +130,8 @@ public abstract class AbstractCurve implements Curve {
             if (v.getX() > max.getX()) max.setX(v.getX());
             if (v.getY() > max.getY()) max.setY(v.getY());
         }
-        int s = (int) Math.min(w / max.getX(), h/ max.getY());
+        double s = Math.min(w / max.getX(), h / max.getY());
+        scale = new Vertex(1, 1);
         scale.setX(s);
         scale.setY(-s);
         // Calculate translation to the center of the view
@@ -118,25 +143,52 @@ public abstract class AbstractCurve implements Curve {
         centerOfSpline.add(center);
     }
 
+    @Override
+    public Vertex getScale() {
+        return scale;
+    }
+
+    @Override
+    public Vertex getTranslation() {
+        return translation;
+    }
+
     protected abstract void calcSegment(int i) throws Exception;
+
+
+    protected void autoCompleteKnotvector() { // for uniform Splines
+        int delta = knotVector.get(knotVector.size() - 1) - knotVector.get(knotVector.size() - 2);
+        int length = Math.abs(knotVector.size() - getM());
+
+        if (knotVector.size() < getM()) {
+            for (int i = 0; i < length; i++) {
+                knotVector.add(knotVector.get(knotVector.size()-1) + delta);
+            }
+        } else {
+            for (int i = 0; i < length; i++) {
+                knotVector.remove(knotVector.size() - 1);
+            }
+        }
+    }
 
     /**
      * This function takes the first point of every segment and combines it with its certain knot value t.
+     *
      * @throws Exception if a curve has no segments
      */
     protected void calcKnots() throws Exception {
         if (segments.size() == 0)
             throw new Exception("Curve has no segments");
-
         for (int i = 0; i < segments.size(); i++) {
             var seg = segments.get(i);
             Knot k = new Knot(seg.get(0), knotVector.get(i)); // knot at the start of segment
             knots.add(k);
-            if (i == segments.size() -1) {
-                knots.add(new Knot(seg.get(seg.size()-1), knotVector.get(knotVector.size()-1)));
+            if (i == segments.size() - 1) {
+                knots.add(new Knot(seg.get(seg.size() - 1), knotVector.get(knotVector.size() - 1)));
             }
         }
     }
+
     @Override
     public abstract void calcCurve() throws Exception;
 
@@ -149,7 +201,14 @@ public abstract class AbstractCurve implements Curve {
         }
 
         for (int i = 0; i < list.size(); i++) {
-            var v = list.get(i);
+            var cp = list.get(i);
+
+            Vertex v;
+            if (cp instanceof Knot) {
+                v = new Knot(cp.getX(),cp.getY(), ((Knot) cp).getT());
+            } else {
+                v = new Vertex(cp.getX(),cp.getY());
+            }
             v.scale(scale);     // Transformation to window coordinates
             v.translate(translation);
             Circle c = new Circle(v.getX(), v.getY(), radius, paint);
@@ -180,16 +239,21 @@ public abstract class AbstractCurve implements Curve {
 
     protected void drawControlPoints(ObservableList<Node> children) {
         drawPoints(controlPoints, children, 6, Color.DEEPSKYBLUE, TextPosition.UP);
+//        drawPoints(centerOfSpline,children,6,Color.DARKGREEN,TextPosition.UP);
     }
 
     protected void drawKnots(ObservableList<Node> children) {
-        drawPoints(knots, children,5, Color.DARKRED, TextPosition.DOWN);
+        drawPoints(knots, children, 5, Color.DARKRED, TextPosition.DOWN);
     }
 
     protected void drawCurve(ObservableList<Node> children) {
         Polyline p = new Polyline();
+        p.setStroke(Color.CORNFLOWERBLUE);
+        p.setStrokeWidth(2);
+
         segments.forEach(seg ->
-                seg.forEach(num -> {
+                seg.forEach(n -> {
+                    var num = new Vertex(n.getX(), n.getY());
                     num.scale(scale);
                     num.translate(translation);
                     p.getPoints().addAll(num.toArray()[0], num.toArray()[1]);
@@ -201,7 +265,8 @@ public abstract class AbstractCurve implements Curve {
     /**
      * This function will add all the elements to these lists that are needed in order to display control points,
      * knots and the curve.
-     * @param obsCP All elements for the control points will be added to this list.
+     *
+     * @param obsCP    All elements for the control points will be added to this list.
      * @param obsKnots All elements for the knots will be added to this list.
      * @param obsCurve All elements for the curve will be added to this list.
      */

@@ -34,9 +34,6 @@ public class UniformBSpline extends AbstractCurve{
         if (controlPoints.size() < 4) {
             throw new Exception("Not enough control points! Number of control points: "+ controlPoints.size());
         }
-        if (knotVector.size() != getM()) {
-            throw new Exception("Number of Knotvector T="+ knotVector.size() + " does not equal m="+getM());
-        }
 
         double [][] G = {
                 controlPoints.get(i-3).toArray(),
@@ -64,6 +61,7 @@ public class UniformBSpline extends AbstractCurve{
         for (int i = 0; i < getM()-1; i++) {
             calcSegment(i+3);
         }
+        autoCompleteKnotvector();
         calcKnots();
     }
 
