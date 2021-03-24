@@ -27,6 +27,20 @@ public class BezierSpline extends AbstractCurve {
         // (an-4)/3 = n
         return (controlPoints.size() - 4) / 3 + 1;
     }
+    @Override
+    protected void autoCompleteKnotvector() { // for uniform Splines
+        int delta = knotVector.get(knotVector.size() - 1) - knotVector.get(knotVector.size() - 2);
+        int length = Math.abs(knotVector.size() - (getM()+1));
+        if (knotVector.size() < getM()+1) {
+            for (int i = 0; i < length; i++) {
+                knotVector.add(knotVector.get(knotVector.size()-1) + delta);
+            }
+        } else if (knotVector.size() > getM()+1){
+            for (int i = 0; i < length; i++) {
+                knotVector.remove(knotVector.size() - 1);
+            }
+        }
+    }
 
     @Override
     protected void calcSegment(int i) throws Exception {

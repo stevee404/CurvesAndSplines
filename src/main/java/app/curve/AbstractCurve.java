@@ -159,16 +159,19 @@ public abstract class AbstractCurve implements Curve {
     protected void autoCompleteKnotvector() { // for uniform Splines
         int delta = knotVector.get(knotVector.size() - 1) - knotVector.get(knotVector.size() - 2);
         int length = Math.abs(knotVector.size() - getM());
-
+        System.out.println("m: "+getM());
+        System.out.println("length: "+length);
         if (knotVector.size() < getM()) {
             for (int i = 0; i < length; i++) {
                 knotVector.add(knotVector.get(knotVector.size()-1) + delta);
             }
-        } else {
+        } else if (knotVector.size() > getM()){
             for (int i = 0; i < length; i++) {
                 knotVector.remove(knotVector.size() - 1);
             }
         }
+
+        System.out.println(knotVector);
     }
 
     /**

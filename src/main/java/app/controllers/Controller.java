@@ -61,7 +61,6 @@ public class Controller {
 
     public void updateView() {
         if (c != null) {
-            System.out.println(drawPane.getScaleX()+"\t"+drawPane.getScaleY());
             drawPane.getChildren().clear();
             Group root = new Group();
             Group curve = new Group();
