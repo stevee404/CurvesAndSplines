@@ -20,13 +20,14 @@ The curve is only rescaled to your window size when you click draw.
 - **CurveType:** Bezier
 - **Control Points:** `0,0,2,4,4,4,6,0`
 - **Knotvector:** `0,1`
-![image](https://user-images.githubusercontent.com/80679352/112305558-20a05800-8c9f-11eb-94ef-35fd2651d195.png)
+![image](https://user-images.githubusercontent.com/80679352/112310765-3b75cb00-8ca5-11eb-951a-870ba5219616.png)
+
 
 ### A Bezier-Spline
 - **CurveType:** Bezier
 - **Control Points:** `0,0,6,6,2,4,6,2,10,0,7,5,6,6`
 - **Knotvector:** `0,1,2`
-![image](https://user-images.githubusercontent.com/80679352/112305727-55141400-8c9f-11eb-8fba-29898de46e4d.png)
+![image](https://user-images.githubusercontent.com/80679352/112310875-59433000-8ca5-11eb-8e5e-8420fb58929b.png)
 
 ### A B-Spline
 - **CurveType:** Uniform B-Spline
