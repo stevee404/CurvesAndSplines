@@ -1,5 +1,5 @@
 # Curves And Splines
-A small Programm in JavaFX that can calculate and display **uniform B-Splines** and **Bezier-Curves/Splines**.
+A small program in JavaFX that approximates and displays **uniform B-Splines** and **Bezier-Curves/Splines**.
 
 ## Usage
 ### Pull Repo + Gradle
