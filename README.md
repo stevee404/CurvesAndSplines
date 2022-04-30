@@ -1,6 +1,9 @@
 # Curves And Splines
 A small program in JavaFX that approximates and displays **uniform B-Splines** and **Bezier-Curves/Splines**.
 
+# Notice
+This was a private project after the first year of my computer science studies. The idea came from a computer graphics class and I wanted to combine it with some recently learned design patterns.
+
 ## Usage
 ### Pull Repo + Gradle
 You only need to have Gradle installed. Then you should be able to type either `gradle run` to execute it.
